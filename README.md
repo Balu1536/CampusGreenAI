@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CampusGreen AI
 
 **Measure. Improve. Sustain.**
@@ -110,3 +111,6 @@ API docs: http://localhost:8000/docs
 ## License
 
 MIT — suitable for internship submissions, hackathons, research, and startup development.
+=======
+# CampusGreenAI
+>>>>>>> f4fd19d501f013c9eae3878bc9708b01c5f11cf3
