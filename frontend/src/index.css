@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canopy: #0b2b1e;
+  --forest: #143d2b;
+  --moss: #3f7a52;
+  --sprout: #7cd992;
+  --mist: #eaf7ee;
+  --amber: #f4b942;
+  --coral: #f2725c;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canopy text-mist font-sans antialiased min-h-screen;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 217, 146, 0.15), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(63, 122, 82, 0.2), transparent);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply rounded-xl2 border border-white/10 bg-white/5 backdrop-blur-md shadow-lg;
+  }
+
+  .glass-strong {
+    @apply rounded-xl2 border border-white/15 bg-white/10 backdrop-blur-xl shadow-xl;
+  }
+
+  .bg-mesh {
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(124, 217, 146, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(63, 122, 82, 0.1) 0%, transparent 50%);
+  }
+}
+
+.growth-ring-arc {
+  animation: ring-fill 1.2s ease-out forwards;
+}
+
+@keyframes ring-fill {
+  to {
+    stroke-dashoffset: var(--ring-offset);
+  }
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.recharts-text {
+  fill: rgba(234, 247, 238, 0.7);
+  font-size: 12px;
+}
