@@ -61,6 +61,25 @@ function CategoryCard({ rec }: { rec: CategoryRecommendation }) {
   );
 }
 
+function RecommendationCard({ recText, category, sdg, priority }: { recText: string; category: string; sdg: string; priority: "high" | "medium" | "low" }) {
+  return (
+    <div className="rounded-xl2 border border-white/10 bg-white/5 p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h3 className="font-display font-semibold">{category}</h3>
+          <p className="font-mono text-sm text-mist/60 mt-1">Related SDG: {sdg}</p>
+        </div>
+        <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${PRIORITY_STYLES[priority]}`}>
+          {priority} priority
+        </span>
+      </div>
+      <p className="mt-4 text-sm text-mist/75 leading-relaxed">
+        {recText}
+      </p>
+    </div>
+  );
+}
+
 export default function Dashboard({ result, recommendations, onNavigate }: DashboardProps) {
   if (!result || !recommendations) {
     return (
@@ -115,12 +134,12 @@ export default function Dashboard({ result, recommendations, onNavigate }: Dashb
 
         <div className="lg:col-span-2 glass p-6 animate-rise" style={{ animationDelay: "0.1s" }}>
           <h2 className="font-display font-semibold text-lg mb-4">Category scores</h2>
-          <div className="space-y-4">
+          <div className="grid md:grid-cols-2 gap-6">
             {result.categories.map((cat) => (
-              <div key={cat.id}>
-                <div className="flex items-center justify-between text-sm mb-1.5">
-                  <span className="text-mist/80">{cat.label}</span>
-                  <span className="font-mono text-sprout">{cat.percentage}%</span>
+              <div key={cat.id} className="rounded-xl2 border border-white/10 bg-white/5 p-5">
+                <div className="mb-4">
+                  <h3 className="font-display font-semibold">{cat.label}</h3>
+                  <p className="font-mono text-sm text-mist/60 mt-1">Score: {cat.percentage}%</p>
                 </div>
                 <div className="h-3 rounded-full bg-white/10 overflow-hidden">
                   <div
@@ -128,7 +147,7 @@ export default function Dashboard({ result, recommendations, onNavigate }: Dashb
                     style={{ width: `${cat.percentage}%` }}
                   />
                 </div>
-                <p className="text-xs text-mist/45 mt-1">
+                <p className="text-xs text-mist/45 mt-2">
                   {cat.rawScore}/{cat.maxScore} points · {cat.weight}% weight
                 </p>
               </div>
@@ -207,8 +226,21 @@ export default function Dashboard({ result, recommendations, onNavigate }: Dashb
         </div>
         <p className="text-mist/80 leading-relaxed mb-6">{recommendations.summary}</p>
         <div className="grid sm:grid-cols-2 gap-4">
-          {weakCategories.map((rec) => (
-            <CategoryCard key={rec.categoryId} rec={rec} />
+          {weakCategories.flatMap((cat) =>
+            cat.recommendations.map((recText, idx) => ({
+              recText,
+              category: cat.categoryLabel,
+              sdg: cat.sdgs[0],
+              priority: cat.priority,
+            }))
+          ).map((rec, idx) => (
+            <RecommendationCard
+              key={idx}
+              recText={rec.recText}
+              category={rec.category}
+              sdg={rec.sdg}
+              priority={rec.priority}
+            />
           ))}
         </div>
       </div>

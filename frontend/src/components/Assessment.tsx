@@ -1,13 +1,11 @@
 import { useMemo, useState } from "react";
 import { ArrowRight, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import { ANSWER_OPTIONS, CATEGORIES, QUESTIONS, AnswerValue } from "../data/questions";
-import { Page } from "../types";
 
 interface AssessmentProps {
   answers: Record<string, AnswerValue>;
   onAnswersChange: (answers: Record<string, AnswerValue>) => void;
   onComplete: () => void;
-  onNavigate: (page: Page) => void;
 }
 
 export default function Assessment({ answers, onAnswersChange, onComplete, onNavigate }: AssessmentProps) {
@@ -156,10 +154,7 @@ export default function Assessment({ answers, onAnswersChange, onComplete, onNav
       {answeredCount === QUESTIONS.length && (
         <div className="mt-6 text-center">
           <button
-            onClick={() => {
-              onComplete();
-              onNavigate("dashboard");
-            }}
+            onClick={onComplete}
             className="inline-flex items-center gap-2 text-sprout hover:text-mist transition-colors text-sm font-medium"
           >
             Skip to Dashboard <ArrowRight size={16} />

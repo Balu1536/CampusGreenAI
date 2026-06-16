@@ -10,6 +10,8 @@ const LINKS: { id: Page; label: string }[] = [
   { id: "landing", label: "Home" },
   { id: "assessment", label: "Assessment" },
   { id: "dashboard", label: "Dashboard" },
+  { id: "history", label: "History" },
+  { id: "benchmark", label: "Benchmark" },
   { id: "responsible-ai", label: "Responsible AI" },
 ];
 

@@ -1,4 +1,4 @@
-export type Page = "landing" | "assessment" | "dashboard" | "responsible-ai";
+export type Page = "landing" | "institution-details" | "assessment" | "dashboard" | "history" | "benchmark" | "responsible-ai";
 
 export type { AnswerValue } from "../data/questions";
 export type { AssessmentResult, CategoryResult } from "../utils/scoring";
